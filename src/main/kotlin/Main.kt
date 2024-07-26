@@ -14,8 +14,67 @@ data class Post(
     val likes: Likes?,
     val postType: String,
     val signerId: Int,
-    val canDelete: Boolean = true
+    val canDelete: Boolean = true,
+    val attachments: Array<Attachment> = emptyArray()
 )
+
+interface Attachment {
+    val typeAttachment: String
+}
+
+data class Audio(
+    val id: Int,
+    val ownerId: Int,
+    val artist: String,
+    val title: String
+)
+
+data class AudioAttachment(val audio: Audio) : Attachment {
+    override val typeAttachment: String = "photo"
+}
+
+data class Video(
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val duration: Int
+)
+
+data class VideoAttachment(val video: Video) : Attachment {
+    override val typeAttachment: String = "video"
+}
+
+data class Sticker(
+    val stickerId: Int,
+    val productId: Int,
+    var isAllowed: Boolean
+)
+
+data class StickerAttachment(val sticker: Sticker) : Attachment {
+    override val typeAttachment: String = "sticker"
+}
+
+data class Story(
+    val id: Int,
+    val ownerId: Int,
+    val date: Int,
+    val seen: Boolean
+)
+
+data class StoryAttachment(val story: Story) : Attachment {
+    override val typeAttachment: String = "story"
+}
+
+data class File(
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val size: Int
+)
+
+data class FileAttachment(val file: File) : Attachment {
+    override val typeAttachment: String = "file"
+}
 
 
 data class Likes(

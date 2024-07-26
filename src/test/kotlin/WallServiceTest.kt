@@ -2,9 +2,7 @@ import org.junit.Assert.*
 import org.junit.Before
 
 import org.junit.Test
-import ru.netology.Likes
-import ru.netology.Post
-import ru.netology.WallService
+import ru.netology.*
 
 class WallServiceTest {
 
@@ -24,7 +22,8 @@ class WallServiceTest {
     @Test
     fun update() {
         val service = WallService
-        service.add(Post(0, 1, 1, 1, "hello", false, likes = Likes(1, false, false, false), "post", 1, false))
+        val arrayAttachment = arrayOf(FileAttachment(File(2,2,"name", 128)), VideoAttachment(Video(1,2,"game", 2800)), AudioAttachment(Audio(1,1,"Qween", "Show")))
+        service.add(Post(0, 1, 1, 1, "hello", false, likes = Likes(1, false, false, false), "post", 1, false, arrayAttachment))
         service.add(Post(1, 1, 1, 1, "hello world", false, likes = Likes(1, false, false, false), "post", 1, false))
         val update = Post(1, 1, 1, 1, "hello", false, likes = Likes(1, false, false, false), "post", 1, false)
         val result = service.update(update)
